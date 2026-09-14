@@ -7,20 +7,17 @@ public class AddContactTests
     [Fact]
     public void AddContactSendsNameToRepo()
     {
-        var contact = new Contact("Filthy Frank");
-
         var repo = Substitute.For<IContactRepository>();
         var service = new ContactService(repo);
 
         var request = new CreateContactRequest
         {
-            Name = contact.Name
+            Name = "Filthy Frank"
         };
 
         service.AddContact(request);
 
         repo.Received(1).Add(Arg.Is<Contact>(c => c.Name == "Filthy Frank"));
-
     }
 
     [Fact]
