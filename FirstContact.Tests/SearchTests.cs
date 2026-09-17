@@ -28,14 +28,14 @@ public class SearchTests
         var repo = Substitute.For<IContactRepository>();
         var service = new ContactService(repo);
 
-        var contact = new Contact("Filthy Frank") { Id = 20 };
+        var contact1 = new Contact("Filthy Frank") { Id = 20 };
+        var contact2 = new Contact("Fabulous Frank") { Id = 20 };
 
-        // MME: return atleast two contacts
-        repo.Search("Filthy Frank").Returns(new[] { contact });
+        repo.Search("Frank").Returns(new[] { contact1, contact2 });
 
-        var searchResult = service.Search("Filthy Frank").ToList();
+        var searchResult = service.Search("Frank").ToList();
 
-        Assert.Single(searchResult);
+        Assert.Equal(2, searchResult.Count);
 
         var response = searchResult[0];
         Assert.Equal(20, response.Id);
