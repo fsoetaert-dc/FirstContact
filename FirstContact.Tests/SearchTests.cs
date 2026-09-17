@@ -10,7 +10,7 @@ public class SearchTests
         var repo = Substitute.For<IContactRepository>();
         var service = new ContactService(repo);
 
-        var contact = new Contact("Filthy Frank"){Id = 20};
+        var contact = new Contact("Filthy Frank") { Id = 20 };
 
         repo.Search("Filthy Frank").Returns(new[] { contact });
         //makes sure that when repo.Search("Filthy Frank") is called it returns new[] { contact }
@@ -28,8 +28,9 @@ public class SearchTests
         var repo = Substitute.For<IContactRepository>();
         var service = new ContactService(repo);
 
-        var contact = new Contact("Filthy Frank") {Id = 20};
-        
+        var contact = new Contact("Filthy Frank") { Id = 20 };
+
+        // MME: return atleast two contacts
         repo.Search("Filthy Frank").Returns(new[] { contact });
 
         var searchResult = service.Search("Filthy Frank").ToList();
